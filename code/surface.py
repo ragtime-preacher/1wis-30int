@@ -36,7 +36,7 @@ class Surface :
     # The idea with this function is to find which sublist is the longest and
     #   "fill in" the other sublists with the fill character, which is 'n' by
     #   default.
-    def justify (self, fill: str = 'n'):
+    def justify (self, fill: str = ' '):
         target_length = self._find_longest_sublist()
         for i_sub in range(len(self.data)):
             if len(self.data[i_sub]) < target_length:
