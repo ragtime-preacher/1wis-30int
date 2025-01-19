@@ -1,0 +1,578 @@
+{
+    "dagger": {
+        "name": "Dagger",
+        "dice": "1d4",
+        "damage_type": "piercing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "simple",
+            "finesse",
+            "thrown (30/90)",
+            "light"
+        ],
+        "price": "2 GP",
+        "weight": "1 lb"
+    },
+
+    "javelin": {
+        "name": "Javelin",
+        "dice": "1d6",
+        "damage_type": "piercing",
+        "attack_stat": "STR",
+        "range": "5 ft",
+        "tags": [
+            "simple",
+            "melee",
+            "thrown (45/180)"
+        ],
+        "price": "5 SP",
+        "weight": "2 lbs"
+    },
+
+    "quarterstaff": {
+        "name": "Quarterstaff",
+        "dice": "1d6",
+        "damage_type": "bludgeoning",
+        "attack_stat": "STR",
+        "range": "5 ft",
+        "tags": [
+            "melee",
+            "simple",
+            "versatile (1d8)"
+        ],
+        "price": "2 SP",
+        "weight":"4 lbs"
+    },
+
+    "club": {
+        "name": "Club",
+        "dice": "1d4",
+        "damage_type": "bludgeoning",
+        "attack_stat": "STR",
+        "range": "5 ft",
+        "tags": [
+            "melee",
+            "simple",
+            "light"
+        ],
+        "price": "1 SP",
+        "weight": "2 lbs"
+    },
+
+    "greatclub": {
+        "name": "Greatclub",
+        "dice": "1d8",
+        "damage_type": "bludgeoning",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "simple",
+            "two-handed"
+        ],
+        "price": "2 SP",
+        "weight": "10 lbs"
+    },
+
+    "sickle": {
+        "name": "Sickle",
+        "dice": "1d4",
+        "damage_type": "slashing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "simple",
+            "light"
+        ]
+    },
+
+    "spear": {
+        "name": "Spear",
+        "dice": "1d6",
+        "damage_type": "piercing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "simple",
+            "thrown (30/90)",
+            "versatile (1d8)"
+        ]
+    },
+
+    "handaxe": {
+        "name": "Handaxe",
+        "dice": "1d6",
+        "damage_type": "slashing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "simple",
+            "thrown (30/90)",
+            "light"
+        ],
+        "price": "5 GP",
+        "weight": "2 lbs"
+    },
+
+    "lighthammer": {
+        "name": "Light Hammer",
+        "dice": "1d4",
+        "damage_type": "bludgeoning",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "simple",
+            "thrown (30/90)",
+            "light"
+        ],
+        "price": "2 GP",
+        "weight": "2 lbs"
+    },
+
+    "mace": {
+        "name": "Mace",
+        "dice": "1d6",
+        "damage_type": "bludgeoning",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "simple"
+        ],
+        "price":"5 GP",
+        "weight":"4 lbs"
+    },
+
+    "shortbow": {
+        "name": "Short Bow",
+        "dice": "1d6",
+        "damage_type": "piercing",
+        "attack_stat": "DEX",
+        "range": "80 / 320 ft",
+        "tags": [
+            "ranged",
+            "simple",
+            "two-handed",
+            "ammunition"
+        ],
+        "price": "25 GP",
+        "weight": "2 lbs"
+    },
+
+    "crossbowlight": {
+        "name": "Light Crossbow",
+        "dice": "1d8",
+        "damage_type": "piercing",
+        "attack_stat": "DEX",
+        "range":"80 / 320 ft",
+        "tags": [
+            "ranged",
+            "simple",
+            "two-handed",
+            "ammunition",
+            "reloading"
+        ],
+        "price": "25 GP",
+        "weight": "5 lbs"
+    },
+
+    "dart": {
+        "name": "Dart",
+        "dice": "1d4",
+        "damage_type": "piercing",
+        "attack_stat": "DEX",
+        "range": "30 / 90 ft",
+        "tags": [
+            "ranged",
+            "simple",
+            "finesse",
+            "thrown"
+        ],
+        "price": "5 CP",
+        "weight": "150 g"
+    },
+
+    "sling": {
+        "name": "Sling",
+        "dice": "1d4",
+        "damage_type": "bludgeoning",
+        "attack_stat": "DEX",
+        "range": "30 / 120 ft",
+        "tags": [
+            "ranged",
+            "simple",
+            "ammunition"
+        ],
+        "price": "1 SP",
+        "weight": "-"
+    },
+
+    "halberd": {
+        "name": "Halberd",
+        "dice": "1d10",
+        "damage_type": "slashing",
+        "attack_stat": "STR",
+        "range": "10 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "two-handed",
+            "reach",
+            "heavy"
+        ],
+        "price": "20 GP",
+        "weight": "6 lbs"
+    },
+
+    "whip": {
+        "name": "Whip",
+        "dice": "1d4",
+        "damage_type": "slashing",
+        "attack_stat": "STR",
+        "range":"10 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "finesse",
+            "reach"
+        ],
+        "price": "2 GP",
+        "weight": "3 lbs"
+    },
+
+    "cimitar": {
+        "name": "Cimitar",
+        "dice": "1d6",
+        "damage_type": "slashing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "finesse",
+            "light"
+        ],
+        "price": "25 GP",
+        "weight":"3 lbs"
+    },
+
+    "shortsword": {
+        "name": "Short Sword",
+        "dice": "1d6",
+        "damage_type": "piercing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "finesse",
+            "light"
+        ],
+        "price": "10 GP",
+        "weight": "2 lbs"
+    },
+
+    "greatsword": {
+        "name": "Greatsword",
+        "dice": "2d6",
+        "damage_type": "slashing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "two-handed",
+            "heavy"
+        ],
+        "price": "50 GP",
+        "weight": "6 lbs"
+    },
+
+    "longsword": {
+        "name": "Longsword",
+        "dice": "1d8",
+        "damage_type": "slashing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "versatile (1d10)"
+        ],
+        "price": "15 GP",
+        "weight": "3 lbs"
+    },
+
+    "glaive": {
+        "name": "Glaive",
+        "dice": "1d10",
+        "damage_type": "slashing",
+        "attack_stat": "STR",
+        "range":"10 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "two-handed",
+            "reach",
+            "heavy"
+        ],
+        "price":"20 GP",
+        "weight": "6 lbs"
+    },
+
+    "lance": {
+        "name": "Lance",
+        "dice": "1d12",
+        "damage_type": "piercing",
+        "attack_stat": "STR",
+        "range": "10 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "special (lance)",
+            "reach"
+        ]
+    },
+
+    "pike": {
+        "name": "Pike",
+        "dice": "1d10",
+        "damage_type": "piercing",
+        "attack_stat": "STR",
+        "range":"10 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "two-handed",
+            "reach",
+            "heavy"
+        ],
+        "price": "5 GP",
+        "weight": "18 lbs"
+    },
+
+    "morningstar": {
+        "name": "Morning Star",
+        "dice": "1d8",
+        "damage_type": "piercing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial"
+        ],
+        "price": "15 GP",
+        "weight": "4 lbs"
+    },
+
+    "battleaxe": {
+        "name": "Battleaxe",
+        "dice": "1d8",
+        "damage_type": "slashing",
+        "attack_stat": "STR",
+        "range": "5 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "versatile (1d10)"
+        ],
+        "price": "10 GP",
+        "weight": "4 lbs"
+    },
+    
+    "greataxe": {
+        "name": "Greataxe",
+        "dice": "1d12",
+        "damage_type": "slashing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "two-handed",
+            "heavy"
+        ],
+        "price": "30 GP",
+        "weight": "7 lbs"
+    },
+
+    "maul": {
+        "name": "Maul",
+        "dice": "2d6",
+        "damage_type": "bludgeoning",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "two-handed",
+            "heavy"
+        ],
+        "price": "10 GP",
+        "weight": "10 lbs"
+    },
+
+    "flail": {
+        "name": "Flail",
+        "dice": "1d8",
+        "damage_type": "bludgeoning",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial"
+        ],
+        "price": "10 GP",
+        "weight": "2 lbs"
+    },
+
+    "warhammer": {
+        "name": "War Hammer",
+        "dice": "1d8",
+        "damage_type": "bludgeoning",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "versatile (1d10)"
+        ],
+        "price": "15 GP",
+        "weight": "2 lbs"
+    },
+
+    "warpick": {
+        "name": "War Hammer",
+        "dice": "1d8",
+        "damage_type": "piercing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial"
+        ],
+        "price": "5 GP",
+        "weight": "2 lbs"
+    },
+
+    "rapier": {
+        "name": "Rapier",
+        "dice": "1d8",
+        "damage_type": "piercing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "finesse"
+        ],
+        "price": "25 GP",
+        "weight": "2 lbs"
+    },
+
+    "trident": {
+        "name": "Trident",
+        "dice": "1d6",
+        "damage_type": "piercing",
+        "attack_stat": "STR",
+        "range":"5 ft",
+        "tags": [
+            "melee",
+            "martial",
+            "thrown (30/90)",
+            "versatile (1d8)"
+        ],
+        "price": "5 GP",
+        "weight": "4 lbs"
+    },
+
+    "longbow": {
+        "name": "Longbow",
+        "dice": "1d8",
+        "damage_type": "piercing",
+        "attack_stat": "DEX",
+        "range": "150 / 600 ft",
+        "tags": [
+            "ranged",
+            "martial",
+            "two-handed",
+            "ammunition",
+            "heavy"
+        ],
+        "price":"50 GP",
+        "weight": "2 lbs"
+    },
+
+    "crossbowhand": {
+        "name": "Hand Crossbow",
+        "dice": "1d6",
+        "damage_type": "piercing",
+        "attack_stat": "DEX",
+        "range": "80 / 320 ft",
+        "tags": [
+            "ranged",
+            "martial",
+            "light",
+            "ammunition",
+            "reloading"
+        ],
+        "price": "75 GP",
+        "weight": "3 lbs"
+    },
+
+    "crossbowheavy": {
+        "name": "Heavy Crossbow",
+        "dice": "1d10",
+        "damage_type": "piercing",
+        "attack_stat": "DEX",
+        "range": "100 / 400 ft",
+        "tags": [
+            "ranged",
+            "martial",
+            "two-handed",
+            "ammunition",
+            "heavy",
+            "reloading"
+        ],
+        "price": "50 GP",
+        "weight": "18 lbs"
+    },
+
+    "net": {
+        "name": "Net",
+        "dice": "-",
+        "damage_type": "-",
+        "attack_stat": "STR",
+        "range": "5 / 15 ft",
+        "tags": [
+            "ranged",
+            "martial",
+            "thrown",
+            "special (net)"
+        ],
+        "price": "1 GP",
+        "weight": "3 lbs"
+    },
+
+    "blowpipe": {
+        "name": "Blowpipe",
+        "dice": "1",
+        "damage_type": "piercing",
+        "attack_stat": "DEX",
+        "range": "40 / 120 ft",
+        "tags": [
+            "ranged",
+            "martial",
+            "ammunition",
+            "reloading"
+        ],
+        "price": "10 GP",
+        "weight": "1 lb"
+    }
+}

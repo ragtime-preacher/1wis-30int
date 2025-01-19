@@ -1,0 +1,121 @@
+{
+    "padded": {
+        "name": "Padded Armor",
+        "base_ac": 11,
+        "armor_rank": "light",
+        "str_required": 0,
+        "stealth_disadvantage": true,
+        "weight": "4 kg",
+        "cost": "5 GP"
+    },
+
+    "leather": {
+        "name": "Leather Armor",
+        "base_ac": 11,
+        "armor_rank": "light",
+        "str_required": 0,
+        "stealth_disadvantage": false,
+        "weight": "5 kg",
+        "cost": "10 GP"
+    },
+
+    "studdedleather": {
+        "name": "Studded Leather Armor",
+        "base_ac": 12,
+        "armor_rank": "light",
+        "str_required": 0,
+        "stealth_disadvantage": false,
+        "weight": "7 kg",
+        "cost": "45 GP"
+    },
+
+    "hide": {
+        "name": "Hide Armor",
+        "base_ac": 12,
+        "armor_rank": "medium",
+        "str_required": 0,
+        "stealth_disadvantage": false,
+        "weight": "6 kg",
+        "cost": "10 GP"
+    },
+
+    "halfmail": {
+        "name": "Half Mail Armor",
+        "base_ac": 13,
+        "armor_rank": "medium",
+        "str_required": 0,
+        "stealth_disadvantage": false,
+        "weight": "10 kg",
+        "cost": "50 GP"
+    },
+
+    "scalemail": {
+        "name": "Scale Mail Armor",
+        "base_ac": 14,
+        "armor_rank": "medium",
+        "str_required": 0,
+        "stealth_disadvantage": true,
+        "weight": "22 kg",
+        "cost": "50 GP"
+    },
+
+    "breastplate": {
+        "name": "Breastplate",
+        "base_ac": 14,
+        "armor_rank": "medium",
+        "str_required": 0,
+        "stealth_disadvantage": false,
+        "weight": "10 kg",
+        "cost": "400 GP"
+    },
+
+    "halfplate": {
+        "name": "Half Plate Armor",
+        "base_ac": 15,
+        "armor_rank": "medium",
+        "str_required": 0,
+        "stealth_disadvantage": true,
+        "weight": "20 kg",
+        "cost": "750 GP"
+    },
+
+    "ringmail": {
+        "name": "Ring Mail Armor",
+        "base_ac": 14,
+        "armor_rank": "heavy",
+        "str_required": 0,
+        "stealth_disadvantage": true,
+        "weight": "20 kg",
+        "cost": "30 GP"
+    },
+
+    "chainmail": {
+        "name": "Chainmail Armor",
+        "base_ac": 16,
+        "armor_rank": "heavy",
+        "str_required": 13,
+        "stealth_disadvantage": true,
+        "weight": "27 kg",
+        "cost": "75 GP"
+    },
+
+    "splint": {
+        "name": "Splint Armor",
+        "base_ac": 17,
+        "armor_rank": "heavy",
+        "str_required": 15,
+        "stealth_disadvantage": true,
+        "weight": "30 kg",
+        "cost": "200 GP"
+    },
+
+    "plate": {
+        "name": "Plate Armor",
+        "base_ac": 18,
+        "armor_rank": "heavy",
+        "str_required": 15,
+        "stealth_disadvantage": true,
+        "weight": "32 kg",
+        "cost": "1500 GP"
+    }
+}
