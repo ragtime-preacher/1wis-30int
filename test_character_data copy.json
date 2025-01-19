@@ -1,0 +1,142 @@
+{
+	"name": "Bruenor D'fawlt",
+	"species": "Mountain Dwarf",
+	"size": "Medium",
+	"alignment": "",
+	"current_xp": "",
+
+	"stat_str": 17,
+	"stat_dex": 10,
+	"stat_con": 16,
+	"stat_int": 8,
+	"stat_wis": 13,
+	"stat_cha": 12,
+
+	"is_inspired": false,
+
+	"prof_bonus": 2,
+	"prof_st_str": true,
+	"prof_st_dex": false,
+	"prof_st_con": true,
+	"prof_st_int": false,
+	"prof_st_wis": false,
+	"prof_st_cha": false,
+
+	"prof_weapons": ["Martial", "Simple"],
+	"prof_armor": ["Light", "Medium", "Heavy", "Shields"],
+
+	"species_traits": [
+        "Darkvision - 60 feet",
+        "Poison resistance - Advantage on ST against Poison",
+        "Dwarven weapon training - proficient in Battleaxes, Handaxes, Light hammers, and War Hammers",
+        "Tool Proficiency - proficient in one artesan's tools: Smith's tools, Brewing Supplies, Mason's tools. Chose: Smith's Tools",
+        "Stonecunning - add 2x prof bonus to history checks about stonework.",
+        "Languages - dwarvish and common."
+],
+
+	"skills": {
+		"athletics": 0.0,
+
+		"acrobatics": 0.0,
+		"sleight of hand": 0.0,
+		"stealth": 0.0,
+
+		"arcana": 0.0,
+		"history": 0.0,
+		"investigation": 0.0,
+		"religion": 0.0,
+
+		"insight": 0.0,
+		"medicine": 0.0,
+		"perception": 0.0,
+		"survival": 0.0,
+
+		"persuasion": 0.0,
+		"intimidation": 0.0,
+		"deception": 0.0,
+		"performance": 0.0
+	},
+	"prof_tools": ["smith's tools"],
+	"languages": ["common", "dwarvish"],
+
+
+	"armor_class": 18,
+	"initiative_bonus": 0,
+	"movement": {
+		"walking": 25,
+		"flying": 0,
+		"swimming": 0,
+		"climbing": 0,
+		"burrowing": 0
+	},
+	"hp_max": 1,
+	"hp_current": 1,
+	"hp_temporary": 7,
+	"hit_die": [],
+
+	"attacks": [],
+	"eq_weapons": [
+		"battleaxe",
+		"handaxe",
+		"dagger",
+		"longbow"
+	],
+	"eq_armor": [
+		"shield",
+		"mail"
+	],
+	"eq_other": ["chefs tools"],
+	"money": [], 
+
+	"resistances": {
+		"bludgeoning": 1,
+		"piercing": 1,
+		"slashing": 1,
+		"fire": 1,
+		"cold": 1,
+		"acid": 1,
+		"poison": 0.5,
+		"radiant": 1,
+		"necrotic": 1,
+		"lightning": 1,
+		"thunder": 1
+	},
+
+	"rp_personality_traits": [],
+	"rp_ideals": [],
+	"rp_bonds": [],
+	"flaws": [],
+
+    "rp_background": "Folk Hero",
+	"rp_apearance": [],
+	"rp_backstory": [],
+	"rp_allies": [],
+	"rp_organizations": [],
+	"rp_characteristics": [],
+	"rp_treasures": [],
+
+
+	"class_features": [],
+	"feats": [],
+	"levels": [
+        "FIGHTER 1"
+    ],
+
+	"sc_stat": null,
+	"sc_dc": 10,
+	"sc_attack_bonus": 0,
+
+	"sc_spells_known": [],
+	"sc_spells_prep": [],
+	"sc_slots": {
+		"1st": 0,
+		"2nd": 0,
+		"3rd": 0,
+		"4th": 0,
+		"5th": 0,
+		"6th": 0,
+		"7th": 0,
+		"8th": 0,
+		"9th": 0
+	}
+}
