@@ -36,6 +36,19 @@ class Screen (ABC) :
         for i_row in range(len(self.surface.data)):
             dest.addstr(i_row, 0, self.surface.data[i_row])
 
+        # get_proficiency_char ()
+        #   This function is needed by two of our subclasses, so I decided to 
+        #       keep it here.
+    def get_proficiency_char (self, prof: float) :
+        if prof == 0.0: # no proficiency
+            return " "
+        if prof == 0.5: # jack of all trades
+            return "-"
+        if prof == 1.0: # proficiency
+            return "/"
+        if prof == 2.0: # expertise
+            return "X"
+
 class TestScreen(Screen):
     def __init__(self):
         self.surface = Surface ([[]])
@@ -116,15 +129,7 @@ f"      ({self.get_proficiency_char(data["skills"]["athletics"])}) Athletics: {i
     ])
         return
     
-    def get_proficiency_char (self, prof: float) :
-        if prof == 0.0: # no proficiency
-            return " "
-        if prof == 0.5: # jack of all trades
-            return "-"
-        if prof == 1.0: # proficiency
-            return "/"
-        if prof == 2.0: # expertise
-            return "X"
+
 
 # The screen for showing skills, sorted alphabetically
 # read "AlphaBeticalSort"
