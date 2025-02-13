@@ -1,5 +1,5 @@
 import curses
-from screen import CombatScreen
+from screen import SkillScreenPAS
 from Character import Character
 
 def main(stdscr):
@@ -7,7 +7,7 @@ def main(stdscr):
     stdscr.clear()
 
     # Create instances
-    testScreen = CombatScreen()
+    testScreen = SkillScreenPAS()
     testCharacter = Character("/home/lurch5-64/progamming/1wis-30int/test_character_data.json")
 
     # Render and draw

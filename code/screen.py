@@ -101,3 +101,33 @@ f"    Weapon Attacks:"
         ])
         for i_attack in data["attacks"]:
             self.surface.data.append (f"\t{i_attack}")
+
+# The screen for showing skills, grouped together by the parent attribute
+# read "ParentAttributeSort"
+class SkillScreenPAS (Screen):
+    def render (self, source: Character):
+        data = source.data
+        self.surface = Surface ([
+f" ~~ SKILLS PAGE ~~                                                             ",
+f"    Proficiency Bonus: {data["prof_bonus"]:+}",
+f"    Skills by parent attribute:",
+f"    = STRENGTH ({get_mod(data["stat_str"]):+}) =",
+f"      ({self.get_proficiency_char(data["skills"]["athletics"])}) Athletics: {int(get_mod(data["stat_str"])+data["prof_bonus"]*data["skills"]["athletics"]):+}"
+    ])
+        return
+    
+    def get_proficiency_char (self, prof: float) :
+        if prof == 0.0: # no proficiency
+            return " "
+        if prof == 0.5: # jack of all trades
+            return "-"
+        if prof == 1.0: # proficiency
+            return "/"
+        if prof == 2.0: # expertise
+            return "X"
+
+# The screen for showing skills, sorted alphabetically
+# read "AlphaBeticalSort"
+class SkillScreenABS (Screen):
+    def render (self, source: Character) :
+        pass
