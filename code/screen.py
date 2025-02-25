@@ -194,8 +194,6 @@ f"      ({self.get_proficiency_char(data["skills"]["intimidation"])}) Intimidati
 f"      ({self.get_proficiency_char(data["skills"]["performance"])}) Performance: {int(get_mod(data["stat_cha"])+data["prof_bonus"]*data["skills"]["performance"])}",
 f"      ({self.get_proficiency_char(data["skills"]["persuasion"])}) Persuasion: {int(get_mod(data["stat_cha"])+data["prof_bonus"]*data["skills"]["persuasion"])}",
     ]) ; return
-    
-
 
 # The screen for showing skills, sorted alphabetically
 # read "AlphaBeticalSort"
@@ -229,3 +227,94 @@ f"      ({self.get_proficiency_char(data["skills"]["sleight of hand"])}) Sleight
 f"      ({self.get_proficiency_char(data["skills"]["stealth"])}) Stealth (DEX): {int(get_mod(data["stat_dex"])+data["prof_bonus"]*data["skills"]["stealth"]):+}",
 f"      ({self.get_proficiency_char(data["skills"]["survival"])}) Survival (DEX): {int(get_mod(data["stat_wis"])+data["prof_bonus"]*data["skills"]["survival"])}",
         ]) ; return
+
+class SpellScreen (Screen):
+    def __init__ (self):
+        super().__init__()
+        self.alias = "spells"
+    
+    def render (self, source: Character):
+        data = source.data
+        self.surface = Surface ([
+f" ~~ SPELLS PAGE ~~                                                             ",
+f"    Spell Slots (available/total):"
+])
+        for i_slot_level in data["sc_slots_total"].keys():
+            if data["sc_slots_total"][i_slot_level] != 0:
+                self.surface.append(
+f"      {i_slot_level}: {data["sc_slots_available"]} / {data["sc_slots_total"]}"
+            )
+        self.surface.append("-"*80)
+
+        if len(data["sc_spells_known"]) == 0:
+            # we're dealing with a preparation spellcaster.
+            self.subrender_preparation(source)
+        else:
+            # It's a known-spells spellcaster.
+            self.subrender_knowledge(source)
+    
+    def subrender_preparation (self, source: Character):
+        data = source.data
+        # NOTE:
+        #   This function is a big mess because I don't want to render levels
+        #       of spells if our source doesn't have the capacity to cast
+        #       those spells.
+        #   There's probably a better way to deal with this problem, but I
+        #       don't know what it is.
+        ps = [
+f"    Spells prepared:",
+        ]
+        # Not every spellcaster gets cantrips...
+        #   (paladins, I'm looking at you)
+        if len(data["sc_cantrips_known"]) > 0:
+            ps.append (
+f"      = Cantrips (0th level) ="
+            )
+            ps.extend([f"          {i_cantrip}" for i_cantrip in data["sc_cantrips_known"]])
+        # past the cantrip point, we can check if we're allowed to each level of spells by looking
+        #   at the number of spell slots that we have for each level.
+        # if we don't have any nth level spell slots, we can assume that our
+        #   character doesn't have the capacity to cast nth level spells, and
+        #   there's no point in rendering that level.
+        # at that point, we are good to exit our function.
+        
+        # check 1st level spells
+        if data["sc_slots_total"]["1st"] == 0: return
+        # otherwise, we'd better render our spells
+        ps.append(
+f"      = 1st level ="
+        )
+        level1_spells_list = [spell for spell in data["sc_spells_prepared"] if spell["level"] == "1st-level"]
+        # this if/else might seem a bit redundant, since earlier we are
+        #   already checking if we are allowed to cast 1st level spells.
+        # however, this double-checking would be helpful in a hypothetical
+        #   situation where a higher-level spellcaster neglects to prepare any
+        #   spells of a certain level - say a cleric, in a fit of insanity,
+        #   fails to prepare inflict wounds, or perhaps a paladin focuses
+        #   her meager quantity of known spells on cool stuff like find steed,
+        #   knowing full well that the best 1st-level cleric spell is 
+        #   SMITE and there's hardly any point in preparing anything else.
+        if len(level1_spells_list) == 0:
+            ps.append(f"          n/a")
+        else:
+            ps.extend(level1_spells_list)
+        # check 2nd level spells
+        if data["sc_slots_total"]["2nd"] == 0: return
+
+        ps.append(
+f"      = 2nd level ="
+        )
+        level2_spells_list = [spell for spell in data["sc_spells_prepared"] if spell["level"] == "2nd-level"]
+        if len(level2_spells_list) == 0:
+            ps.append(f"          n/a")
+        else:
+            ps.extend(level2_spells_list)
+        # TODO:
+        #   spell levels 3-9
+            
+        # tack our postscript onto the main surface
+        self.surface.extend(ps)
+
+
+    def subrender_knowledge (self, source: Character):
+        pass
