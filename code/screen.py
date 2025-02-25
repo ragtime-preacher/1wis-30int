@@ -205,4 +205,27 @@ class SkillScreenABS (Screen):
         self.alias = "skill14"
 
     def render (self, source: Character) :
-        pass
+        data = source.data
+        self.surface = Surface ([
+f" ~~ SKILLS PAGE ~~                                                             ",
+f"    Proficiency Bonus: {data["prof_bonus"]:+}",
+f"    Skills in alphabetical order:",
+f"      ({self.get_proficiency_char(data["skills"]["acrobatics"])}) Acrobatics (DEX): {int(get_mod(data["stat_dex"])+data["prof_bonus"]*data["skills"]["acrobatics"]):+}",
+f"      ({self.get_proficiency_char(data["skills"]["animal handling"])}) Animal Handling (WIS): {int(get_mod(data["stat_wis"])+data["prof_bonus"]*data["skills"]["animal handling"])}",
+f"      ({self.get_proficiency_char(data["skills"]["arcana"])}) Arcana (INT): {int(get_mod(data["stat_int"])+data["prof_bonus"]*data["skills"]["arcana"])}",
+f"      ({self.get_proficiency_char(data["skills"]["athletics"])}) Athletics (STR): {int(get_mod(data["stat_str"])+data["prof_bonus"]*data["skills"]["athletics"]):+}",
+f"      ({self.get_proficiency_char(data["skills"]["deception"])}) Deception (CHA): {int(get_mod(data["stat_cha"])+data["prof_bonus"]*data["skills"]["deception"])}",
+f"      ({self.get_proficiency_char(data["skills"]["history"])}) History (INT): {int(get_mod(data["stat_int"])+data["prof_bonus"]*data["skills"]["history"])}",
+f"      ({self.get_proficiency_char(data["skills"]["insight"])}) Insight (WIS): {int(get_mod(data["stat_wis"])+data["prof_bonus"]*data["skills"]["insight"])}",
+f"      ({self.get_proficiency_char(data["skills"]["intimidation"])}) Intimidation (CHA): {int(get_mod(data["stat_cha"])+data["prof_bonus"]*data["skills"]["intimidation"])}",
+f"      ({self.get_proficiency_char(data["skills"]["investigation"])}) Investigation (INT): {int(get_mod(data["stat_int"])+data["prof_bonus"]*data["skills"]["investigation"])}",
+f"      ({self.get_proficiency_char(data["skills"]["medicine"])}) Medicine (WIS): {int(get_mod(data["stat_wis"])+data["prof_bonus"]*data["skills"]["medicine"])}",
+f"      ({self.get_proficiency_char(data["skills"]["nature"])}) Nature (INT): {int(get_mod(data["stat_int"])+data["prof_bonus"]*data["skills"]["nature"])}",
+f"      ({self.get_proficiency_char(data["skills"]["perception"])}) Perception (WIS): {int(get_mod(data["stat_wis"])+data["prof_bonus"]*data["skills"]["perception"])}",
+f"      ({self.get_proficiency_char(data["skills"]["performance"])}) Performance (CHA): {int(get_mod(data["stat_cha"])+data["prof_bonus"]*data["skills"]["performance"])}",
+f"      ({self.get_proficiency_char(data["skills"]["persuasion"])}) Persuasion (CHA): {int(get_mod(data["stat_cha"])+data["prof_bonus"]*data["skills"]["persuasion"])}",
+f"      ({self.get_proficiency_char(data["skills"]["arcana"])}) Religion (INT): {int(get_mod(data["stat_int"])+data["prof_bonus"]*data["skills"]["religion"])}",
+f"      ({self.get_proficiency_char(data["skills"]["sleight of hand"])}) Sleight of Hand (DEX): {int(get_mod(data["stat_dex"])+data["prof_bonus"]*data["skills"]["sleight of hand"]):+}",
+f"      ({self.get_proficiency_char(data["skills"]["stealth"])}) Stealth (DEX): {int(get_mod(data["stat_dex"])+data["prof_bonus"]*data["skills"]["stealth"]):+}",
+f"      ({self.get_proficiency_char(data["skills"]["survival"])}) Survival (DEX): {int(get_mod(data["stat_wis"])+data["prof_bonus"]*data["skills"]["survival"])}",
+        ]) ; return

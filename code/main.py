@@ -1,5 +1,5 @@
 import curses
-from screen import HomeScreen, StatScreen, CombatScreen, SkillScreenPAS
+from screen import HomeScreen, StatScreen, CombatScreen, SkillScreenPAS, SkillScreenABS
 from Character import Character
 from screenmanager import ScreenManager
 
@@ -12,7 +12,8 @@ def main(stdscr):
             HomeScreen(),
             StatScreen(),
             CombatScreen(),
-            SkillScreenPAS()
+            SkillScreenPAS(),
+            SkillScreenABS()
         ]
     )
     manager.mainloop ()
