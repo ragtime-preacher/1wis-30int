@@ -57,7 +57,6 @@ class Screen (ABC) :
             self.scroll_index = 0
         elif self.scroll_index > len(self.surface.data)-curses.LINES+1:
             self.scroll_index = len(self.surface.data)-curses.LINES+1
-        # TODO impliment this
         
 
         # get_proficiency_char ()
@@ -241,10 +240,10 @@ f"    Spell Slots (available/total):"
 ])
         for i_slot_level in data["sc_slots_total"].keys():
             if data["sc_slots_total"][i_slot_level] != 0:
-                self.surface.append(
-f"      {i_slot_level}: {data["sc_slots_available"]} / {data["sc_slots_total"]}"
+                self.surface.data.append(
+f"      {i_slot_level}: {data["sc_slots_available"][i_slot_level]} / {data["sc_slots_total"][i_slot_level]}"
             )
-        self.surface.append("-"*80)
+        self.surface.data.append("-"*80)
 
         if len(data["sc_spells_known"]) == 0:
             # we're dealing with a preparation spellcaster.
@@ -270,50 +269,147 @@ f"    Spells prepared:",
             ps.append (
 f"      = Cantrips (0th level) ="
             )
-            ps.extend([f"          {i_cantrip}" for i_cantrip in data["sc_cantrips_known"]])
+            ps.extend([f"          {i_cantrip["name"]}" for i_cantrip in data["sc_cantrips_known"]])
         # past the cantrip point, we can check if we're allowed to each level of spells by looking
         #   at the number of spell slots that we have for each level.
         # if we don't have any nth level spell slots, we can assume that our
         #   character doesn't have the capacity to cast nth level spells, and
         #   there's no point in rendering that level.
         # at that point, we are good to exit our function.
+        # But only if we've already extended our surface.
         
-        # check 1st level spells
-        if data["sc_slots_total"]["1st"] == 0: return
+        # 1ST LEVEL
+        if data["sc_slots_total"]["1st"] == 0:
+            self.surface.data.extend(ps)
+            return
         # otherwise, we'd better render our spells
         ps.append(
 f"      = 1st level ="
         )
-        level1_spells_list = [spell for spell in data["sc_spells_prepared"] if spell["level"] == "1st-level"]
+        level1_spells_list = [f"          {spell["name"]}" for spell in data["sc_spells_prep"] if spell["level"] == "1st-level"]
         # this if/else might seem a bit redundant, since earlier we are
         #   already checking if we are allowed to cast 1st level spells.
         # however, this double-checking would be helpful in a hypothetical
         #   situation where a higher-level spellcaster neglects to prepare any
         #   spells of a certain level - say a cleric, in a fit of insanity,
-        #   fails to prepare inflict wounds, or perhaps a paladin focuses
+        #   neglects to prepare inflict wounds, or perhaps a paladin focuses
         #   her meager quantity of known spells on cool stuff like find steed,
-        #   knowing full well that the best 1st-level cleric spell is 
+        #   knowing full well that the best 1st-level paladin spell is 
         #   SMITE and there's hardly any point in preparing anything else.
         if len(level1_spells_list) == 0:
             ps.append(f"          n/a")
         else:
             ps.extend(level1_spells_list)
-        # check 2nd level spells
-        if data["sc_slots_total"]["2nd"] == 0: return
+
+        # 2ND LEVEL
+        if data["sc_slots_total"]["2nd"] == 0:
+            self.surface.data.extend(ps)
+            return
 
         ps.append(
 f"      = 2nd level ="
         )
-        level2_spells_list = [spell for spell in data["sc_spells_prepared"] if spell["level"] == "2nd-level"]
+        level2_spells_list = [f"          {spell["name"]}" for spell in data["sc_spells_prep"] if spell["level"] == "2nd-level"]
         if len(level2_spells_list) == 0:
             ps.append(f"          n/a")
         else:
             ps.extend(level2_spells_list)
-        # TODO:
-        #   spell levels 3-9
-            
-        # tack our postscript onto the main surface
-        self.surface.extend(ps)
+
+        # 3RD LEVEL
+        if data["sc_slots_total"]["3rd"] == 0:
+            self.surface.data.extend(ps)
+            return
+        ps.append(
+f"      = 3rd level ="
+        )
+        level3_spells_list = [f"          {spell["name"]}" for spell in data["sc_spells_prep"] if spell["level"] == "3rd-level"]
+        if len(level3_spells_list) == 0:
+            ps.append(f"          n/a")
+        else:
+            ps.extend(level3_spells_list)
+
+        # 4TH LEVEL
+        if data["sc_slots_total"]["4th"] == 0:
+            self.surface.data.extend(ps)
+            return
+        ps.append(
+f"      = 4th level ="
+        )
+        level4_spells_list = [f"          {spell["name"]}" for spell in data["sc_spells_prep"] if spell["level"] == "4th-level"]
+        if len(level4_spells_list) == 0:
+            ps.append(f"          n/a")
+        else:
+            ps.extend(level4_spells_list)
+        
+        # 5TH LEVEL
+        if data["sc_slots_total"]["5th"] == 0:
+            self.surface.data.extend(ps)
+            return
+        ps.append(
+f"      = 5th level ="
+        )
+        level5_spells_list = [f"          {spell["name"]}" for spell in data["sc_spells_prep"] if spell["level"] == "5th-level"]
+        if len(level5_spells_list) == 0:
+            ps.append(f"          n/a")
+        else:
+            ps.extend(level5_spells_list)
+
+        # 6TH LEVEL
+        if data["sc_slots_total"]["6th"] == 0:
+            self.surface.data.extend(ps)
+            return
+        ps.append(
+f"      = 6th level ="
+        )
+        level6_spells_list = [f"          {spell["name"]}" for spell in data["sc_spells_prep"] if spell["level"] == "6th-level"]
+        if len(level6_spells_list) == 0:
+            ps.append(f"          n/a")
+        else:
+            ps.extend(level6_spells_list)
+
+        # 7TH LEVEL
+        if data["sc_slots_total"]["7th"] == 0:
+            self.surface.data.extend(ps)
+            return
+        ps.append(
+f"      = 7th level ="
+        )
+        level7_spells_list = [f"          {spell["name"]}" for spell in data["sc_spells_prep"] if spell["level"] == "7th-level"]
+        if len(level7_spells_list) == 0:
+            ps.append(f"          n/a")
+        else:
+            ps.extend(level7_spells_list)
+
+        # 8TH LEVEL
+        if data["sc_slots_total"]["8th"] == 0:
+            self.surface.data.extend(ps)
+            return
+        ps.append(
+f"      = 8th level ="
+        )
+        level8_spells_list = [f"          {spell["name"]}" for spell in data["sc_spells_prep"] if spell["level"] == "8th-level"]
+        if len(level8_spells_list) == 0:
+            ps.append(f"          n/a")
+        else:
+            ps.extend(level8_spells_list)
+
+        # 9TH LEVEL
+        if data["sc_slots_total"]["9th"] == 0:
+            self.surface.data.extend(ps)
+            return
+        ps.append(
+f"      = 9th level ="
+        )
+        level9_spells_list = [f"          {spell["name"]}" for spell in data["sc_spells_prep"] if spell["level"] == "9th-level"]
+        if len(level9_spells_list) == 0:
+            ps.append(f"          n/a")
+        else:
+            ps.extend(level9_spells_list)
+
+        # tack our postscript onto the main surface (assuming we 
+        #   haven't already left the function)
+        self.surface.data.extend(ps)
+        return
 
 
     def subrender_knowledge (self, source: Character):
