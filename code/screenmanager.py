@@ -22,10 +22,10 @@ class ScreenManager:
             # display the current screen (underneath all additions)
             self.current_screen.render (self.source)
             self.current_screen.draw (self.stdscr)
+            # draw our message (if we have one)
+            self.draw_message()
             # call our handler callback
             self.handler ()
-            # write our message (if we have one)
-            self.draw_message ()
             # Refresh the screen to show the changes
             curses.doupdate()
     

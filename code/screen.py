@@ -39,12 +39,21 @@ class Screen (ABC) :
         #   This is the real point of the parent class - to inherit 
         #       the drawing functionality to the child classes.
     def draw (self, dest: curses.window) -> None:
-        # We'll switch to using a pad so we can scroll data that's too big.
+        # clear the screen (i couldn't find a better way to do this)
+        for i_row in range(curses.LINES):
+            try:
+                dest.addstr(i_row, 0, " "*(curses.COLS))
+            except curses.error:
+                pass
         for i_row in range(self.scroll_index, len(self.surface.data)):
             try:
                 dest.addstr(i_row-self.scroll_index, 0, self.surface.data[i_row])
             except curses.error:
                 pass
+        # as far as I can tell, this curses error that I'm getting pretty consistently
+        #   is caused by trying to write something to the very last column of the screen.
+        # exactly why that causes such a problem remains a bit of a mystery to me, but
+        #   that's what I've found.
     
     def update_scroll_index (self, amount: int) :
         if len(self.surface.data) < curses.LINES:
