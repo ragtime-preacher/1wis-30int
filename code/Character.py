@@ -33,6 +33,7 @@ class Character:
 
     def update_everything (self):
         self.update_attacks()
+        self.update_spells ()
         # other update methods
 
     # Character.update_attacks ()
@@ -95,3 +96,46 @@ class Character:
         except KeyError as e:
             # something went wrong with our keys
             self.data["attacks"].append(e)
+    
+    def update_spells (self):
+        pass
+
+# DEBUGGING ONLY
+    def _populate_spells (self) :
+        spell_library = open("/home/lurch5-64/progamming/1wis-30int/json_libraries/efficient_spell_library.json")
+        # probably the most gargantuan dictionary I've ever used
+        spell_dict = json.load(spell_library)
+        spell_library.close()
+
+        self.data["sc_slots_total"] = {
+		"1st": 2,
+		"2nd": 1,
+		"3rd": 0,
+		"4th": 0,
+		"5th": 0,
+		"6th": 0,
+		"7th": 0,
+		"8th": 0,
+		"9th": 0
+	}
+        self.data["sc_slots_available"] = {
+		"1st": 2,
+		"2nd": 1,
+		"3rd": 0,
+		"4th": 0,
+		"5th": 0,
+		"6th": 0,
+		"7th": 0,
+		"8th": 0,
+		"9th": 0
+	}
+        self.data["sc_spells_prep"] = [
+            spell_dict["shield"],
+            spell_dict["scorching ray"]
+        ]
+
+        self.data["sc_cantrips_known"] = [
+            spell_dict["eldritch blast"]
+        ]
+
+        self.write_file("test_character_data_with_spells.json")
