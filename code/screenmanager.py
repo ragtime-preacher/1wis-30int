@@ -14,6 +14,7 @@ class ScreenManager:
         self.current_screen = self.menu[0]
         self.handler = self.normal_mode
         self.command_buffer = ""
+        self.current_message = ""
 
     def mainloop (self) :
         # TODO fix terminal flickering
@@ -22,7 +23,9 @@ class ScreenManager:
             self.current_screen.render (self.source)
             self.current_screen.draw (self.stdscr)
             # call our handler callback
-            self.handler()
+            self.handler ()
+            # write our message (if we have one)
+            self.draw_message ()
             # Refresh the screen to show the changes
             curses.doupdate()
     
@@ -45,6 +48,8 @@ class ScreenManager:
         self.stdscr.addstr(curses.LINES - 1, 0, f":{self.command_buffer}")
         key = self.stdscr.getch() # get next keypress
         if key ==  curses.KEY_ENTER or key == 10:
+            # erase the current message
+            self.current_message = ""
             self.parse_command(self.command_buffer)
             self.handler = self.normal_mode
         elif key == 27: # ESC
@@ -66,6 +71,12 @@ class ScreenManager:
             self.current_screen = self.find_screen(command.split(" ")[1])
             # ^ this should give us the second item in a char(32) separated
             #       list of all words in our command buffer.
+        elif command.startswith("cast"):
+            command_buffer = command.split(" ")
+            try:
+                self.current_message = self.source.cast_spell(str(command_buffer[1]), int(command_buffer[2]))
+            except IndexError:
+                self.current_message = "ERROR: invalid command syntax"
     
     def find_screen (self, key: str) -> Screen:
         clean_key = key.replace(" ", "") # just in case
@@ -98,3 +109,13 @@ class ScreenManager:
         # draw the mode to the bottom right corner
         mode_str = f"[{self.current_screen.scroll_index}] <{mode}> "
         self.stdscr.addstr(curses.LINES - 1, curses.COLS - (len(mode_str)+1), mode_str)
+    
+    def draw_message (self) :
+        # clear the message line
+        self.stdscr.addstr(curses.LINES - 2, 0, " "*(curses.COLS-1))
+        if self.current_message == "":
+            # nothing to say.
+            return
+        else:
+            # write the message
+            self.stdscr.addstr(curses.LINES - 2, 1, f"[ {self.current_message} ]")

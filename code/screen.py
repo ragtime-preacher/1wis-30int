@@ -254,6 +254,40 @@ f"      {i_slot_level}: {data["sc_slots_available"][i_slot_level]} / {data["sc_s
     
     def subrender_preparation (self, source: Character):
         data = source.data
+        ps = [
+f"    Spells prepared:"
+        ]
+        # cantrips have to be handled seperately
+        if len(data["sc_cantrips_known"]) > 0:
+            ps.append (
+f"      = Cantrips (0th level) ="
+            )
+            ps.extend([f"          {i_cantrip["name"]}" for i_cantrip in data["sc_cantrips_known"]])
+
+        # NTH LEVEL
+        for nth_level_ordinal in data["sc_slots_total"].keys():
+            # type(i_spell_level_ordinal) = str
+            # hopefully one of the following: 1st, 2nd, 3rd, 4th, 5th, 6th, 7th, 8th, 9th
+            if data["sc_slots_total"][nth_level_ordinal] == 0:
+                # we've reached the end of our castable spells
+                # write to the surface and bail.
+                self.surface.data.extend (ps)
+                return
+            ps.append (
+f"      = {nth_level_ordinal} level ="
+            )
+            nth_level_spells_list = [
+f"{" "*10}{spell["name"]}" for spell in data["sc_spells_prep"] if spell["level"] == f"{nth_level_ordinal}-level"
+            ]
+            if len (nth_level_spells_list) == 0:
+                ps.append(f"{" "*10}n/a")
+            else:
+                ps.extend(nth_level_spells_list)
+            continue
+
+# keep this for the comment documentation
+    def subrender_preparation_legacy (self, source: Character):
+        data = source.data
         # NOTE:
         #   This function is a big mess because I don't want to render levels
         #       of spells if our source doesn't have the capacity to cast

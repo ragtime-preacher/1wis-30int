@@ -100,6 +100,27 @@ class Character:
     def update_spells (self):
         pass
 
+    def cast_spell (self, spell_name: str, spell_level: int) -> str:
+        spell_level_ord = get_ordinal(spell_level)
+        if spell_level < 0 or 9 < spell_level:
+            # bad spell level passed
+            return "Not cast: invalid spell level"
+        if self.data["sc_slots_available"][spell_level_ord] == 0:
+            # out of spell slots of the desired level
+            return "Not cast: no spell slots available of desired level"
+        if spell_name.lower() not in [
+            spell["name"].lower() \
+                for spell in self.data["sc_spells_prep"]
+        ] and spell_name.lower() not in [
+            spell["name"].lower() \
+            for spell in self.data["sc_spells_known"]
+        ]:
+            return "Not cast: no spell found of argued name"
+        # ELSE:
+        self.data["sc_slots_available"][spell_level_ord] -= 1
+        return f"Cast {spell_name.capitalize()} at {spell_level_ord} level"
+
+
 # DEBUGGING ONLY
     def _populate_spells (self) :
         spell_library = open("/home/lurch5-64/progamming/1wis-30int/json_libraries/efficient_spell_library.json")
@@ -108,9 +129,9 @@ class Character:
         spell_library.close()
 
         self.data["sc_slots_total"] = {
-		"1st": 2,
-		"2nd": 1,
-		"3rd": 0,
+		"1st": 4,
+		"2nd": 3,
+		"3rd": 2,
 		"4th": 0,
 		"5th": 0,
 		"6th": 0,
@@ -118,24 +139,32 @@ class Character:
 		"8th": 0,
 		"9th": 0
 	}
-        self.data["sc_slots_available"] = {
-		"1st": 2,
-		"2nd": 1,
-		"3rd": 0,
-		"4th": 0,
-		"5th": 0,
-		"6th": 0,
-		"7th": 0,
-		"8th": 0,
-		"9th": 0
-	}
+        self.data["sc_slots_available"] = self.data["sc_slots_total"].copy()
         self.data["sc_spells_prep"] = [
             spell_dict["shield"],
-            spell_dict["scorching ray"]
+            spell_dict["fireball"]
         ]
 
         self.data["sc_cantrips_known"] = [
-            spell_dict["eldritch blast"]
+            # spell_dict["eldritch blast"]
         ]
 
         self.write_file("test_character_data_with_spells.json")
+
+def get_ordinal (number: int) -> str | None :
+    ordinal_dict = {
+        0: "0th",
+        1: "1st",
+        2: "2nd",
+        3: "3rd",
+        4: "4th",
+        5: "5th",
+        6: "6th",
+        7: "7th",
+        8: "8th",
+        9: "9th"
+    }
+    try:
+        return ordinal_dict[number]
+    except KeyError:
+        return None
