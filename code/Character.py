@@ -100,25 +100,30 @@ class Character:
     def update_spells (self):
         pass
 
-    def cast_spell (self, spell_name: str, spell_level: int) -> str:
-        spell_level_ord = get_ordinal(spell_level)
+#   argue spell_level as 0 to get the minimum-level spell slot.
+    def cast_spell (self, spell_name: str, spell_level: int = 0) -> str:
         if spell_level < 0 or 9 < spell_level:
             # bad spell level passed
             return "Not cast: invalid spell level"
+        if spell_level == 0:
+            # default to minimum possible
+            try:
+                spells_prep_dict = {spell["name"].lower(): spell for spell in self.data["sc_spells_prep"]}
+                spell_level = int(spells_prep_dict[spell_name]["level"][0])
+            except KeyError:
+                return f"not cast: spell '{spell_name}' not prepared"
+        spell_level_ord = get_ordinal(spell_level)
         if self.data["sc_slots_available"][spell_level_ord] == 0:
             # out of spell slots of the desired level
-            return "Not cast: no spell slots available of desired level"
+            return f"not cast: no remaining spell slots of {spell_level_ord} level"
         if spell_name.lower() not in [
             spell["name"].lower() \
                 for spell in self.data["sc_spells_prep"]
-        ] and spell_name.lower() not in [
-            spell["name"].lower() \
-            for spell in self.data["sc_spells_known"]
         ]:
-            return "Not cast: no spell found of argued name"
+            return f"not cast: spell '{spell_name}' not prepared"
         # ELSE:
         self.data["sc_slots_available"][spell_level_ord] -= 1
-        return f"Cast {spell_name.capitalize()} at {spell_level_ord} level"
+        return f"cast {spell_name.capitalize()} at {spell_level_ord} level"
 
 
 # DEBUGGING ONLY
@@ -142,7 +147,8 @@ class Character:
         self.data["sc_slots_available"] = self.data["sc_slots_total"].copy()
         self.data["sc_spells_prep"] = [
             spell_dict["shield"],
-            spell_dict["fireball"]
+            spell_dict["fireball"],
+            spell_dict["scorching ray"]
         ]
 
         self.data["sc_cantrips_known"] = [

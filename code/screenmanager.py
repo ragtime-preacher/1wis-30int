@@ -4,6 +4,7 @@
 import curses
 from Character import Character
 from screen import Screen
+import shlex
 
 class ScreenManager:
     def __init__ (self, stdscr, source: Character, screens: list[Screen]) :
@@ -63,19 +64,31 @@ class ScreenManager:
             self.command_buffer += chr(key)
 
     def parse_command (self, command: str) :
+        command_buffer = shlex.split(command)
         if command == "q":
             # make sure the cursor comes back
             curses.curs_set(1)
             exit ()
         elif command.startswith("switch "):
-            self.current_screen = self.find_screen(command.split(" ")[1])
+            if len(command_buffer) != 2:
+                self.current_message = "ERROR: invalid command syntax"
+                return
+            attempt_screen_switch = self.find_screen(command_buffer[1])
             # ^ this should give us the second item in a char(32) separated
             #       list of all words in our command buffer.
-        elif command.startswith("cast"):
-            command_buffer = command.split(" ")
-            try:
+            if attempt_screen_switch == None:
+                # the screen name they gave us is bogus.
+                self.current_message = f"ERROR: screen '{command_buffer[1]}' not found"
+            else:
+                self.current_screen = attempt_screen_switch
+        elif command.startswith("cast "):
+            if len(command_buffer) == 2:
+                # assume our two command sections to be "cast" and <spell name>
+                # so we'll use the default level spell slot
+                self.current_message = self.source.cast_spell(str(command_buffer[1]), 0)
+            elif len(command_buffer) == 3:
                 self.current_message = self.source.cast_spell(str(command_buffer[1]), int(command_buffer[2]))
-            except IndexError:
+            else:
                 self.current_message = "ERROR: invalid command syntax"
     
     def find_screen (self, key: str) -> Screen:
@@ -92,7 +105,7 @@ class ScreenManager:
                         # one of the aliases matched up!
                         return i_screen
         # didn't find anything?
-        return self.menu[0]
+        return None
 
     def handle_scroll_input (self, key) -> bool :
         if key == curses.KEY_DOWN:
