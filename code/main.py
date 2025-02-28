@@ -10,12 +10,12 @@ def main(stdscr):
         stdscr=stdscr,
         source=testCharacter,
         screens=[
-            SpellScreen(),
             HomeScreen(),
             StatScreen(),
             CombatScreen(),
             SkillScreenPAS(),
-            SkillScreenABS()
+            SkillScreenABS(),
+            SpellScreen()
         ]
     )
     manager.mainloop ()
