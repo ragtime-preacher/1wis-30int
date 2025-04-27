@@ -18,7 +18,6 @@ class ScreenManager:
         self.current_message = ""
 
     def mainloop (self) :
-        # TODO fix terminal flickering
         while True:
             # display the current screen (underneath all additions)
             self.current_screen.render (self.source)

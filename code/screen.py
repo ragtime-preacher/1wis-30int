@@ -457,3 +457,11 @@ f"      = 9th level ="
 
     def subrender_knowledge (self, source: Character):
         pass
+
+class ClassFeaturesScreen (Screen):
+    def __init__(self):
+        super().__init__()
+        self.alias = "features"
+
+    def render (self, source: Character):
+        data = source.data

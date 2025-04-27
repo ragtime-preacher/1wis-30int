@@ -128,7 +128,18 @@
 
 	"sc_spells_known": [],
 	"sc_spells_prep": [],
-	"sc_slots": {
+	"sc_slots_total": {
+		"1st": 0,
+		"2nd": 0,
+		"3rd": 0,
+		"4th": 0,
+		"5th": 0,
+		"6th": 0,
+		"7th": 0,
+		"8th": 0,
+		"9th": 0
+	},
+	"sc_slots_available": {
 		"1st": 0,
 		"2nd": 0,
 		"3rd": 0,

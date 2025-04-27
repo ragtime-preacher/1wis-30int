@@ -1,0 +1,17 @@
+{
+	"evasion": {
+		"description": "whenever you have to make a dex save to avoid taking damage, receiving half damage on a success, you take no damage on a success and only half damage on a failure. pretty cool huh?",
+		"uses": "-1",
+		"timeframe": "n/a"
+	},
+	"bardic inspiration (d6)": {
+		"description": "as a bonus action, give somebody a d6 which they can add to an attack roll, ability check, or saving throw",
+		"uses": "CHA",
+		"timeframe": "long rest"
+	},
+	"action surge (1/rest)": {
+		"description": "take another action.",
+		"uses": 1,
+		"timeframe": "short rest"
+	}
+}
