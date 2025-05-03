@@ -82,22 +82,96 @@
 		}
 	},
 	"BARBARIAN_1": {
-		"rages": 2,
+		"constants": {
+			"rages/long rest": 2,
+			"rage damage": 2
+		},
 		"new class features": [
-			"unarmored defense"
+			"unarmored defense",
+			"rage"
 		]
 	},
 	"BARBARIAN_2": {
-		"rages": 2,
+		"constants": {
+			"rages/long rest": 0,
+			"rage damage": 0
+		},
 		"new class features": [
 			"reckless attack",
 			"danger sense"
 		]
 	},
 	"BARBARIAN_3": {
-		"rages": 3,
+		"constants": {
+			"rages/long rest": 1,
+			"rage damage": 0
+		},
 		"new class features": [
 			"primal path"
+		]
+	},
+	"BARBARIAN_4": {
+		"constants": {
+			"rages/long rest": 0,
+			"rage damage": 0
+		},
+		"new class features": [
+			"Ability Score Increase"
+		]
+	},
+	"BARBARIAN_5": {
+		"constants": {
+			"rages/long rest": 0,
+			"rage damage": 0
+		},
+		"new class features": [
+			"extra attack",
+			"fast movement"
+		]
+	},
+	"BARBARIAN_6": {
+		"constants": {
+			"rages/long rest": 1,
+			"rage damage": 0
+		},
+		"new class features": [
+			"primal path feature"
+		]
+	},
+	"BARBARIAN_7": {
+		"constants": {
+			"rages/long rest": 0,
+			"rage damage": 0
+		},
+		"new class features": [
+			"primal instincts"
+		]
+	},
+	"BARBARIAN_8": {
+		"constants": {
+			"rages/long rest": 0,
+			"rage damage": 0
+		},
+		"new class features": [
+			"Ability Score Increase"
+		]
+	},
+	"BARBARIAN_9": {
+		"constants": {
+			"rages/long rest": 0,
+			"rage damage": 1
+		},
+		"new class features": [
+			"brutal critical (1x)"
+		]
+	},
+	"BARBARIAN_10": {
+		"constants": {
+			"rages/long rest": 0,
+			"rage damage": 0
+		},
+		"new class features": [
+			"primal path feature"
 		]
 	}
 }
