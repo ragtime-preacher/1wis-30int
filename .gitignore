@@ -1,2 +1,3 @@
 .vscode/launch.json
 easygui-venv/
+*/__pycache__
