@@ -40,7 +40,7 @@ class Character:
     #   go through our equipment and add attack strings to the data["attacks"]
     #       list.
     def update_attacks (self):
-        weapon_library = open ("/home/lurch5-64/progamming/1wis-30int/weapon_library.json")
+        weapon_library = open ("/home/feijao/programming/1wis-30int/json_libraries/weapon_library.json")
         weapon_dict = json.load(weapon_library)
         weapon_library.close ()
         try:
@@ -128,7 +128,7 @@ class Character:
 
 # DEBUGGING ONLY
     def _populate_spells (self) :
-        spell_library = open("/home/lurch5-64/progamming/1wis-30int/json_libraries/efficient_spell_library.json")
+        spell_library = open("/home/feijao/programming/1wis-30int/json_libraries/efficient_spell_library.json")
         # probably the most gargantuan dictionary I've ever used
         spell_dict = json.load(spell_library)
         spell_library.close()

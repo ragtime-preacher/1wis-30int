@@ -4,7 +4,7 @@ from Character import Character
 from screenmanager import ScreenManager
 
 def main(stdscr):
-    testCharacter = Character ("/home/lurch5-64/progamming/1wis-30int/test_character_data.json")
+    testCharacter = Character ("/home/feijao/programming/1wis-30int/code/test_character_data_with_spells.json")
     testCharacter._populate_spells()
     manager = ScreenManager (
         stdscr=stdscr,

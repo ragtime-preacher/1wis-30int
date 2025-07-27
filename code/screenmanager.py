@@ -64,7 +64,7 @@ class ScreenManager:
 
     def parse_command (self, command: str) :
         command_buffer = shlex.split(command)
-        if command == "q":
+        if command in ["q", "quit", "exit"]:
             # make sure the cursor comes back
             curses.curs_set(1)
             exit ()
