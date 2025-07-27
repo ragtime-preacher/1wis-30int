@@ -5,6 +5,11 @@ from easygui import choicebox
 
 import faca
 
+# TODO FOR ALL
+#   char_data["species"] = <species>
+#   choose alignment
+#   add common as a known language
+
 def spe_dwarf (char_data: dict):
     # Stat Increase (both subraces have the CON+2)
     char_data["stat_mods"]["con"].append(2)
@@ -36,14 +41,14 @@ def spe_dwarf (char_data: dict):
     """
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 IMPORTANT
-Posting this code as it is now onto Github for public consumption would be
-a violation of copyright law and therefore ILEGAL. DON'T DO IT.
-I'll probably create a private version.
+Posting this code as it is now (including non-SRD character options) 
+onto Github for public consumption would be a violation of copyright
+law and therefore ILEGAL. DON'T DO IT.
 
 For deployment, I'll probably have to include the match statement code commented out
     so that big-time nerds (i.e. the intended users of this program) who want to add the subraces they know and love can do
-    so without too much re-writing, while preventing WotC from breathing fire
-    down my neck.
+    so without too much re-writing, while preventing WotC from casting disintegrate
+    on my future.
         """
     # chosen_subspecies = choicebox ("now son, there's roughly speaking two kinds of dwarves: hill dwarves and dwarves that it's ilegal for me to talk about.", choices=["hill dwarf", "ilegal dwarves"])
     chosen_subspecies = "hill dwarf"
@@ -78,9 +83,101 @@ def spe_elf (char_data: dict):
             char_data["prof_weapons"].extend (["longsword, shortsword, shortbow, longbow"])
             char_data["cantrips_known"].append (faca.choose_spell(0, "wizard", "pick a cantrip bro"))
             # language-choosing nightmare
-    pass
+    # other elf cases
+
+def spe_halfling (char_data: dict):
+    char_data["stat_mods"]["dex"].append(2)
+    char_data["age"] = faca.choose_age("A halfling reaches adulthood at the age of 20 and generally lives into the middle of his or her second century.")
+    char_data["size"] = "Small"
+    char_data["movement"]["walking"] = 25
+    # lucky notes
+    char_data["st_notes"].append ("ADV vs fear")
+    # halfling nimbleness
+    char_data["languages"].append ("halfling")
+    chosen_subspecies = "lightfoot"
+    match chosen_subspecies:
+        case "lightfoot" | None:
+            char_data["stat_mods"]["cha"].append(1)
+            # TODO naturally stealthy
+
+def spe_human (char_data: dict):
+    for i_stat in char_data["stat_mods"]:
+        i_stat.append(1)
+    char_data["age"] = faca.choose_age("Humans reach adulthood in their late teens and live less than a century.")
+    char_data["size"] = "Medium"
+    char_data["movement"]["walking"] = 30
+    char_data["languages"].append(faca.choose_language("pick one non-common language"))
+
+def spe_dragonborn (char_data: dict):
+    char_data["stat_mods"]["str"].append(2)
+    char_data["stat_mods"]["cha"].append(1)
+    char_data["age"] = faca.choose_age("Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a 10-year-old human child by the age of 3, and reach adulthood by 15. They live to be around 80.")
+    char_data["size"] = "Medium"
+    char_data["movement"]["walking"] = 30
+    # TODO: draconic ancestry, damage resistance, breath weapon
+    char_data["languages"].append("draconic")
+    
+
+def spe_gnome (char_data: dict):
+    char_data["stat_mods"]["int"].append(2)
+    char_data["age"] = faca.choose_age("Gnomes mature at the same rate humans do, and most are expected to settle down into an adult life by around age 40. They can live 350 to almost 500 years.")
+    char_data["size"] = "Small"
+    char_data["movement"]["walking"] = 25
+    char_data["senses"]["darkvision"] = 60
+    char_data["st_notes"].append ("ADV w/ int, wis, cha vs magic")
+    char_data["languages"].append("gnomish")
+    chosen_subspecies = "rock gnome"
+    match chosen_subspecies:
+        case "rock gnome":
+            char_data["stat_mods"]["con"].append(1)
+            # TODO artificer's lore
+            # TODO tinker
+
+def spe_halfelf (char_data: dict):
+    char_data["stat_mods"]["cha"].append(2)
+    # TODO choose others to increase
+    char_data["age"] = faca.choose_age("Half-elves mature at the same rate humans do and reach adulthood around the age of 20. They live much longer than humans, however, often exceeding 180 years.")
+    char_data["size"] = "Medium"
+    char_data["movement"]["walking"] = 30
+    char_data["senses"]["darkvision"] = 60
+    char_data["st_notes"].append("ADV vs being charmed")
+    # TODO magic can't put you to sleep
+    # TODO choose 2 skills to be proficient in
+    char_data["languages"].append("elvish")
+    char_data["languages"].append(faca.choose_language("pick one language beyond common and elvish:"))
+
+def spe_halforc (char_data: dict):
+    char_data["stat_mods"]["str"].append(2)
+    char_data["stat_mods"]["con"].append(1)
+    char_data["age"] = faca.choose_age("Half-orcs mature a little faster than humans, reaching adulthood around age 14. They age noticeably faster and rarely live longer than 75 years.")
+    char_data["size"] = "Medium"
+    char_data["movement"]["walking"] = 30
+    char_data["senses"]["darkvision"] = 60
+    char_data["skills"]["intimidation"] = 1
+    # TODO relentless endurance
+    # TODO savage attacks
+    char_data["languages"].append ("orc")
+
+def spe_tiefling (char_data: dict):
+    char_data["stat_mods"]["int"].append(1)
+    char_data["stat_mods"]["cha"].append(2)
+    char_data["age"] = faca.choose_age("Tieflings mature at the same rate as humans but live a few years longer.")
+    char_data["size"] = "Medium"
+    char_data["movement"]["walking"] = 30
+    char_data["senses"]["darkvision"] = 60
+    char_data["resistances"]["fire"] = 0.5
+    # TODO infernal legacy
+    char_data["languages"].append("infernal")
+
 
 SPECIES_DICTIONARY = {
     "DWARF": spe_dwarf,
-    "ELF": spe_elf
+    "ELF": spe_elf,
+    "HALFLING": spe_halfling,
+    "HUMAN": spe_human,
+    "DRAGONBORN": spe_dragonborn,
+    "GNOME": spe_gnome,
+    "HALF-ELF": spe_halfelf,
+    "HALF-ORC": spe_halforc,
+    "TIEFLING": spe_tiefling
 }
