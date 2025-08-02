@@ -8,9 +8,33 @@ def choose_age (flavor: str) :
     return chosen_age
 
 def choose_language (flavor: str) :
-    chosen_language = "portuguese" # TODO: actually choose languages
+    chosen_language = choicebox(
+        msg=flavor,
+        title="Language selection",
+        choices=[
+            # standard languages
+            "Common",
+            "Dwarvish",
+            "Elvish",
+            "Giant",
+            "Gnomish",
+            "Goblin",
+            "Halfling",
+            "Orc",
+            # exotic languages
+            "Abyssal",
+            "Celestial",
+            "Draconic",
+            "Deep Speech",
+            "Infernal",
+            "Primordial",
+            "Sylvan",
+            "Undercommon"
+        ]
+    )
     return chosen_language
 
+# TODO
 # spell_list defaults to wizard. Argue one or more
 #   levels of spells (0 = cantrip) to narrow the choices.
 def choose_spell (levels: list[int] | int, spell_list: str, flavor: str):
