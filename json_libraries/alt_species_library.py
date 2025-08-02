@@ -6,7 +6,6 @@ from easygui import choicebox
 import faca
 
 # TODO FOR ALL
-#   add common as a known language
 #   add the species traits
 
 def spe_dwarf (char_data: dict):
@@ -38,6 +37,7 @@ def spe_dwarf (char_data: dict):
     # stonecunning is not appropriate to include mechanically
     # language
     char_data["languages"].append ("dwarvish")
+    char_data["languages"].append ("common")
     # This is where the fun begins... subspecies!
     """
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -79,6 +79,7 @@ def spe_elf (char_data: dict):
     # magic can't put you to sleep
     # trance
     char_data["languages"].append ("elvish")
+    char_data["languages"].append ("common")
     chosen_subspecies = "high elf"
     match chosen_subspecies:
         case "high elf" | None:
@@ -99,6 +100,7 @@ def spe_halfling (char_data: dict):
     char_data["st_notes"].append ("ADV vs fear")
     # halfling nimbleness
     char_data["languages"].append ("halfling")
+    char_data["languages"].append ("common")
     chosen_subspecies = "lightfoot"
     match chosen_subspecies:
         case "lightfoot" | None:
@@ -114,6 +116,7 @@ def spe_human (char_data: dict):
     char_data["alignment"] = faca.choose_alignment("Humans tend toward no particular alignment. The best and the worst are found among them.")
     char_data["size"] = "Medium"
     char_data["movement"]["walking"] = 30
+    char_data["languages"].append ("common")
     char_data["languages"].append(faca.choose_language("pick one non-common language"))
 
 def spe_dragonborn (char_data: dict):
@@ -130,6 +133,7 @@ def spe_dragonborn (char_data: dict):
     ancestry = "i dunno gold I guess"
     char_data["species"] = f"dragonborn ({ancestry})"
     char_data["languages"].append("draconic")
+    char_data["languages"].append ("common")
     
 
 def spe_gnome (char_data: dict):
@@ -141,6 +145,7 @@ def spe_gnome (char_data: dict):
     char_data["senses"]["darkvision"] = 60
     char_data["st_notes"].append ("ADV w/ int, wis, cha vs magic")
     char_data["languages"].append("gnomish")
+    char_data["languages"].append ("common")
     chosen_subspecies = "rock gnome"
     match chosen_subspecies:
         case "rock gnome" | None:
@@ -162,6 +167,7 @@ def spe_halfelf (char_data: dict):
     # TODO magic can't put you to sleep
     # TODO choose 2 skills to be proficient in
     char_data["languages"].append("elvish")
+    char_data["languages"].append ("common")
     char_data["languages"].append(faca.choose_language("pick one language beyond common and elvish:"))
 
 def spe_halforc (char_data: dict):
@@ -177,6 +183,7 @@ def spe_halforc (char_data: dict):
     # TODO relentless endurance
     # TODO savage attacks
     char_data["languages"].append ("orc")
+    char_data["languages"].append ("common")
 
 def spe_tiefling (char_data: dict):
     char_data["species"] = "tiefling"
@@ -190,6 +197,7 @@ def spe_tiefling (char_data: dict):
     char_data["resistances"]["fire"] = 0.5
     # TODO infernal legacy
     char_data["languages"].append("infernal")
+    char_data["languages"].append ("common")
 
 
 SPECIES_DICTIONARY = {
