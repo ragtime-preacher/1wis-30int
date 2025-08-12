@@ -35,6 +35,19 @@ class Character:
         self.update_attacks()
         self.update_spells ()
         # other update methods
+    
+    def short_rest (self):
+        # TODO
+        # offer hit die rolling, update relevant abilities (like warlock spell slots)
+        pass
+    
+    def long_rest (self):
+        self.short_rest()
+        # TODO
+        # heal up, regain hit die, remove status conditions, reset spell slots,
+        #   and update limited-use abilities like dragonborn's breath weapons
+        # also for preparation spellcasters, offer the choice to change spells.
+        pass
 
     # Character.update_attacks ()
     #   go through our equipment and add attack strings to the data["attacks"]
