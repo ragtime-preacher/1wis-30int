@@ -41,10 +41,16 @@ def choose_language (flavor: str, ignore: list[str] | str = "Common") :
     )
     return chosen_language
 
-# TODO choose n spells with a multibox, allow for multiple spell_lists
+# TODO choose n spells with a multibox, allow for multiple spell lists
 #   TODO (maybe) show only spells from certain schools of magic
 # spell_list defaults to wizard. Argue one or more
 #   levels of spells (0 = cantrip) to narrow the choices.
+# NOTE
+#   So it turns out that Easygui doesn't have functionality to 
+#       limit the user to n choices in a multchoicebox.
+#   It is therefore possible that I'll eventually have to do a total
+#       overhaul of this ui using something like tkinter.
+#   que paia.
 def choose_spell (levels: list[int] | int, spell_list: str, flavor: str):
     chosen_spell = choicebox(
         msg=flavor,
@@ -95,6 +101,8 @@ def spell_filter (spell_levels: list[int] | int, spell_list: str) -> list[str]:
         found_spells.append("FILTER ERROR: no spells found")
     return found_spells
 
+# maybe adjust this so alignment is so wordy. Or maybe not.
+#   alignment in 5e is largely optional anyway, so it probably doesn't matter that much.
 def choose_alignment (flavor: str) :
     alignment_options = {
         "LG": "Lawful good creatures can be counted on to do the right thing as expected by society.",
@@ -114,3 +122,57 @@ def choose_alignment (flavor: str) :
         preselect=4
     )
     return chosen_alignment
+
+def choose_ability_score (flavor: str, ignore: list[str] | str):
+    if type(ignore) == list:
+        ignore_list = [stat_to_ignore.casefold() for stat_to_ignore in ignore]
+    elif type(ignore) == str:
+        ignore_list = [ignore.casefold()]
+
+    stat_list = [
+        "Strength",
+        "Dexterity",
+        "Constitution",
+        "Intelligence",
+        "Wisdom",
+        "Charisma"
+    ]
+    chosen_ability_score = str(choicebox(
+        msg=flavor,
+        title="Ability Score selection",
+        choices=[stat for stat in stat_list if stat.casefold() not in ignore_list]
+    ))
+    return chosen_ability_score
+
+def choose_skill (flavor: str, ignore: list[str] | str):
+    if type(ignore) == list:
+        ignore_list = [i_skill.casefold() for i_skill in ignore]
+    elif type(ignore) == str:
+        ignore_list = [ignore.casefold()]
+
+    skill_list = [
+        "Acrobatics",
+        "Animal Handling",
+        "Arcana",
+        "Athletics",
+        "Deception",
+        "History",
+        "Insight",
+        "Intimidation",
+        "Investigation",
+        "Medicine",
+        "Nature",
+        "Perception",
+        "Performance",
+        "Persuasion",
+        "Religion",
+        "Sleight of Hand",
+        "Stealth",
+        "Survival"
+]
+    chosen_skill = choicebox (
+        msg=flavor,
+        title="skill selection",
+        choices = [skill.lower() for skill in skill_list if skill.casefold() not in ignore_list]
+    )
+    return chosen_skill
