@@ -31,9 +31,9 @@ def generate_empty_pc_data () :
     "st_notes": [],
     "prof_weapons": [],
     "prof_armor": [],
-    "species_traits": [],
+    "species_traits": {},
     "skills": {
-        "athletics": 0.5,
+        "athletics": 0.0,
         "acrobatics": 0.0,
         "sleight of hand": 0.0,
         "stealth": 0.0,
