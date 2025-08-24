@@ -142,6 +142,8 @@ def choose_ability_score (flavor: str, ignore: list[str] | str):
         title="Ability Score selection",
         choices=[stat for stat in stat_list if stat.casefold() not in ignore_list]
     ))
+    if chosen_ability_score == None:
+        chosen_ability_score = "Dexterity"
     return chosen_ability_score
 
 def choose_skill (flavor: str, ignore: list[str] | str, include: list[str] | None):
@@ -205,13 +207,6 @@ def determine_stats () -> list[int]:
             stats_int.append(10)
     return stats_int
 
-# This function can take either a string describing a category
-#   ("simple", "martial", or "all") or a list of specific weapons to include.
-# TODO refine this for better filtering
-#   e.g. 4 flags: simple, martial, ranged, melee, default to all true
-#   and include a custom option.
-# Available flags:
-#   martial, simple, ranged, melee
 def choose_weapon (
         weapon_class: str | None = 'all',
         weapon_range: str | None = 'all',
@@ -285,6 +280,35 @@ def choose_weapon (
         # x'd out
         chosen_weapon = "club"
     return str(chosen_weapon)
+
+def ability_score_increase (current_scores: dict):
+    # I think the best way to do this might be to just offer two +1 choices,
+    #   allowing the user to choose the same ability score twice if they want.
+    scores_to_mod = []
+    f_current_scores = f"Strength: {current_scores["STR"]}\nDexterity: {current_scores["DEX"]}\nConstitution: {current_scores["CON"]}\nIntelligence: {current_scores["INT"]}\nWisdom: {current_scores["WIS"]}\nCharisma: {current_scores["CHA"]}"
+    first_score = choicebox (
+        msg=f"pick a score to +1:\n{f_current_scores}",
+        title="con is never a bad option",
+        choices=["STR", "DEX", "CON", "INT", "WIS", "CHA"]
+    )
+    if first_score == None:
+        first_score = "DEX"
+    current_scores[first_score] += 1
+    scores_to_mod.append(first_score)
+    f_current_scores = f"Strength: {current_scores["STR"]}\nDexterity: {current_scores["DEX"]}\nConstitution: {current_scores["CON"]}\nIntelligence: {current_scores["INT"]}\nWisdom: {current_scores["WIS"]}\nCharisma: {current_scores["CHA"]}"
+    second_score = choicebox (
+        msg=f"pick another score to +1 (it can be the same as the first):\n{f_current_scores}",
+        title="con is never a bad option",
+        choices=["STR", "DEX", "CON", "INT", "WIS", "CHA"]
+    )
+    if second_score == None:
+        second_score = "DEX"
+    scores_to_mod.append(second_score)
+    # no need to update the scores to reflect our second choice, because that will be 
+    #   handled by the ability score modifiers.
+    return scores_to_mod
+
+
 
 # some testing
 def main () :
