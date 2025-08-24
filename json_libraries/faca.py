@@ -1,7 +1,7 @@
 # Frequently Accessed Character Attributes
 # (FACA, or 'knife' in portuguese)
 
-from easygui import integerbox, choicebox
+from easygui import integerbox, choicebox, enterbox, multenterbox
 import json
 
 def choose_age (flavor: str) :
@@ -144,12 +144,11 @@ def choose_ability_score (flavor: str, ignore: list[str] | str):
     ))
     return chosen_ability_score
 
-def choose_skill (flavor: str, ignore: list[str] | str):
+def choose_skill (flavor: str, ignore: list[str] | str, include: list[str] | None):
     if type(ignore) == list:
         ignore_list = [i_skill.casefold() for i_skill in ignore]
     elif type(ignore) == str:
         ignore_list = [ignore.casefold()]
-
     skill_list = [
         "Acrobatics",
         "Animal Handling",
@@ -170,9 +169,105 @@ def choose_skill (flavor: str, ignore: list[str] | str):
         "Stealth",
         "Survival"
 ]
+    if (include != None) and (len(include) > 0):
+        skill_list = include
     chosen_skill = choicebox (
         msg=flavor,
         title="skill selection",
         choices = [skill.lower() for skill in skill_list if skill.casefold() not in ignore_list]
     )
     return chosen_skill
+
+def choose_name ():
+    name = enterbox(
+        msg="under what label will your character's heroic exploits be sung by generations yet unborn?",
+        title="my least favorite part"
+    )
+    if name == None:
+        name = "just a random guy"
+    return name
+
+def determine_stats () -> list[int]:
+    stats_str = multenterbox (
+        msg="pick your stats. Be honest now. Also please use integers or it will cause problems",
+        title="the most important part :)",
+        fields=["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"],
+        values=["10" for i in range(6)]
+    )
+    if stats_str == None:
+        stats_str = ["10" for i in range(6)]
+    stats_int = []
+    for i_stat in stats_str: # type: ignore
+        try:
+            stats_int.append(int(i_stat))
+        except ValueError:
+            # we ended up with something other than a string
+            stats_int.append(10)
+    return stats_int
+
+# This function can take either a string describing a category
+#   ("simple", "martial", or "all") or a list of specific weapons to include.
+# TODO refine this for better filtering
+#   e.g. 4 flags: simple, martial, ranged, melee, default to all true
+#   and include a custom option.
+# Available flags:
+#   martial, simple, ranged, melee
+def choose_weapon (
+        weapon_class: str | None = 'all',
+        weapon_range: str | None = 'all',
+        custom: list[str] | None = None
+    ) -> str:
+    weapon_library = open ("/home/feijao/programming/1wis-30int/json_libraries/weapon_library.json")
+    weapon_dict = json.load(weapon_library)
+    weapon_library.close ()
+    weapon_choices = []
+    if weapon_class == 'all' and weapon_range == 'all':
+        weapon_choices = weapon_dict.keys()
+
+    elif weapon_class != None and weapon_range in [None, 'all']:
+        for i_weapon in weapon_dict.keys():
+            if weapon_class in weapon_dict[i_weapon]["tags"]:
+                weapon_choices.append(i_weapon)
+        
+    elif weapon_class in [None, 'all'] and weapon_range != None:
+        for i_weapon in weapon_dict.keys():
+            if weapon_range in weapon_dict[i_weapon]["tags"]:
+                weapon_choices.append(i_weapon)
+
+    elif weapon_class != None and weapon_range != None:
+        for i_weapon in weapon_dict.keys():
+            if weapon_class in weapon_dict[i_weapon]["tags"] and weapon_range in weapon_dict[i_weapon]["tags"]:
+                weapon_choices.append(i_weapon)
+
+    elif weapon_class == None and weapon_range == None:
+        if type(custom) == list and len(custom) > 0:
+            for i_weapon in custom:
+                if i_weapon in weapon_dict.keys():
+                    weapon_choices.append(i_weapon)
+
+    if len(weapon_choices) == 0:
+        # there must have been some mistake. We'll default to everything
+        # This should be a catch-all for any and all potential
+        #   parameter problems.
+        weapon_choices = weapon_dict.keys()
+
+    chosen_weapon = choicebox(
+        msg="choose a weapon",
+        title="I recommend the really expensive ones, actually",
+        choices=weapon_choices
+    )
+    if chosen_weapon == None:
+        # x'd out
+        chosen_weapon = "club"
+    return str(chosen_weapon)
+
+# some testing
+def main () :
+    print (choose_weapon(
+        weapon_class='simple',
+        weapon_range='melee',
+    ))
+    return 0
+
+if __name__ == "__main__":
+    main ()
