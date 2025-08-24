@@ -221,29 +221,54 @@ def choose_weapon (
     weapon_dict = json.load(weapon_library)
     weapon_library.close ()
     weapon_choices = []
-    if weapon_class == 'all' and weapon_range == 'all':
-        weapon_choices = weapon_dict.keys()
 
-    elif weapon_class != None and weapon_range in [None, 'all']:
-        for i_weapon in weapon_dict.keys():
-            if weapon_class in weapon_dict[i_weapon]["tags"]:
-                weapon_choices.append(i_weapon)
-        
-    elif weapon_class in [None, 'all'] and weapon_range != None:
-        for i_weapon in weapon_dict.keys():
-            if weapon_range in weapon_dict[i_weapon]["tags"]:
-                weapon_choices.append(i_weapon)
-
-    elif weapon_class != None and weapon_range != None:
-        for i_weapon in weapon_dict.keys():
-            if weapon_class in weapon_dict[i_weapon]["tags"] and weapon_range in weapon_dict[i_weapon]["tags"]:
-                weapon_choices.append(i_weapon)
-
-    elif weapon_class == None and weapon_range == None:
-        if type(custom) == list and len(custom) > 0:
-            for i_weapon in custom:
-                if i_weapon in weapon_dict.keys():
+# gotta love match statements
+    match [weapon_class, weapon_range]:
+        case ['all', 'all']:
+            weapon_choices = weapon_dict.keys()
+        case ['simple'|'martial', 'all'|None]:
+            for i_weapon in weapon_dict.keys():
+                if weapon_class in weapon_dict[i_weapon]["tags"]:
                     weapon_choices.append(i_weapon)
+        case ['all'|None, 'melee'|'ranged']:
+            for i_weapon in weapon_dict.keys():
+                if weapon_range in weapon_dict[i_weapon]["tags"]:
+                    weapon_choices.append(i_weapon)
+        case ['simple'|'martial', 'melee'|'ranged']:
+            for i_weapon in weapon_dict.keys():
+                if weapon_class in weapon_dict[i_weapon]["tags"] and \
+                    weapon_range in weapon_dict[i_weapon]["tags"]:
+                    weapon_choices.append(i_weapon)
+        case [None, None]:
+            if type(custom) == list and len(custom) > 0:
+                for i_weapon in custom:
+                    if i_weapon in weapon_dict.keys():
+                        weapon_choices.append(i_weapon)
+
+# LEGACY (hopefully)
+    # if weapon_class == 'all' and weapon_range == 'all':
+    #     weapon_choices = weapon_dict.keys()
+
+    # elif weapon_class != None and weapon_range in [None, 'all']:
+    #     for i_weapon in weapon_dict.keys():
+    #         if weapon_class in weapon_dict[i_weapon]["tags"]:
+    #             weapon_choices.append(i_weapon)
+        
+    # elif weapon_class in [None, 'all'] and weapon_range != None:
+    #     for i_weapon in weapon_dict.keys():
+    #         if weapon_range in weapon_dict[i_weapon]["tags"]:
+    #             weapon_choices.append(i_weapon)
+
+    # elif weapon_class != None and weapon_range != None:
+    #     for i_weapon in weapon_dict.keys():
+    #         if weapon_class in weapon_dict[i_weapon]["tags"] and weapon_range in weapon_dict[i_weapon]["tags"]:
+    #             weapon_choices.append(i_weapon)
+
+    # elif weapon_class == None and weapon_range == None:
+    #     if type(custom) == list and len(custom) > 0:
+    #         for i_weapon in custom:
+    #             if i_weapon in weapon_dict.keys():
+    #                 weapon_choices.append(i_weapon)
 
     if len(weapon_choices) == 0:
         # there must have been some mistake. We'll default to everything
